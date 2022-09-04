@@ -75,48 +75,95 @@
 //     mutl();
 //   }
 // }
-const display = document.getElementById("display");
-let num1 = "";
-let num2 = "";
+// const display = document.getElementById("display");
+// let num1 = "";
+// let num2 = "";
+// let op = "";
+
+// function press(num) {
+//   num1 += num;
+//   console.log("init num is ", num1);
+//   display.innerHTML = num1;
+//   console.log("num now is ", num1);
+// }
+
+// function setOP(key) {
+//   op = key;
+//   console.log("operation is", op);
+//   num2 = num1;
+//   //save 1st input value in num2
+//   num1 = "";
+//   //empty 1st input value
+// }
+
+// function clr() {
+//   num1 = "";
+//   num2 = "";
+//   op = "";
+//   display.innerHTML = "0";
+// }
+
+// function calculate() {
+//   let a = parseFloat(num2);
+//   let b = parseFloat(num1);
+//   let res = 0;
+//   switch (op) {
+//     case "+":
+//       res = a + b;
+//       break;
+//     case "-":
+//       res = a - b;
+//       break;
+//     case "*":
+//       res = a * b;
+//       break;
+//     case "/":
+//       res = a / b;
+//       break;
+//   }
+//   num1 = res;
+//   op = "";
+//   display.innerHTML = res;
+// }
+let numOnScreen = "";
+let prevNum = "";
 let op = "";
 
+function getDisplay() {
+  return document.getElementById("display");
+}
 function press(num) {
-  num1 += num;
-  display.innerHTML = num1;
+  numOnScreen += parseFloat(num);
+  console.log(numOnScreen);
+  getDisplay().innerText = numOnScreen;
 }
-
-function setOP(key) {
-  op = key;
-  num2 = num1;
-  num1 = "";
+function setOP(oper) {
+  op = oper;
+  prevNum = numOnScreen;
+  console.log(prevNum);
+  numOnScreen = "";
+  getDisplay().innerText = "0";
 }
-
 function clr() {
-  num1 = "";
-  num2 = "";
+  numOnScreen = "";
+  prevNum = "";
   op = "";
-  display.innerHTML = "0";
+  getDisplay().innerText = "0";
 }
-
 function calculate() {
-  let a = parseFloat(num2);
-  let b = parseFloat(num1);
-  let res = 0;
-  switch (op) {
-    case "+":
-      res = a + b;
-      break;
-    case "-":
-      res = a - b;
-      break;
-    case "*":
-      res = a * b;
-      break;
-    case "/":
-      res = a / b;
-      break;
+  let result;
+  if (op === "+") {
+    result = prevNum + parseFloat(numOnScreen);
   }
-  num1 = res;
-  op = "";
-  display.innerHTML = res;
+  if (op === "-") {
+    result = prevNum - parseFloat(numOnScreen);
+  }
+  if (op === "/") {
+    result = prevNum / parseFloat(numOnScreen);
+  }
+  if (op === "*") {
+    result = prevNum * parseFloat(numOnScreen);
+  }
+  getDisplay().innerText = result;
 }
+var x = 0;
